@@ -5,6 +5,7 @@ from game_logic import PokerGame
 from player import Player
 
 class PokerServer:
+
     def __init__(self, host='0.0.0.0', port=12345):
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server.bind((host, port))
@@ -91,7 +92,7 @@ class PokerServer:
     def start_game(self):
         game = PokerGame(self.players, self.big_blind)  # 创建游戏实例并传入玩家对象和大盲注
         game.start_game()  # 开始游戏
-
+"""
 if __name__ == "__main__":
     
     while True:
@@ -118,3 +119,4 @@ if __name__ == "__main__":
     server.big_blind = big_blind
     server.small_blind = big_blind // 2  # 小盲注为大盲注的一半
     server.start()
+"""
