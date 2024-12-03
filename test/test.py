@@ -13,7 +13,8 @@ class PokerLauncher:
         
 
         # 加载背景图片
-        self.load_background(os.path.join("test","poker.png"))
+        self.base_path = os.path.dirname(os.path.abspath(__file__))
+        self.load_background(os.path.join(self.base_path,"poker.png"))
 
         # 添加按钮
         self.create_room_button = tk.Button(
@@ -43,16 +44,16 @@ class PokerLauncher:
     def start_server(self):
         """启动服务端，创建房间"""
         def run_server():
-            # 使用 subprocess 调用 server.py
-            subprocess.Popen(["server/dist/server.exe"])
+            # 使用 subprocess 调用 server.exe
+            subprocess.Popen(["../server/dist/ui.exe"])
 
         threading.Thread(target=run_server, daemon=True).start()
 
     def start_client(self):
         """启动客户端，加入房间"""
         def run_client():
-            # 使用 subprocess 调用 client.py
-            subprocess.Popen(["client/dist/client.exe"])
+            # 使用 subprocess 调用 client.
+            subprocess.Popen(["../client/dist/client.exe"])
 
         threading.Thread(target=run_client, daemon=True).start()
 
