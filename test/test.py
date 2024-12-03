@@ -45,7 +45,7 @@ class PokerLauncher:
         """启动服务端，创建房间"""
         def run_server():
             # 使用 subprocess 调用 server.exe
-            subprocess.Popen(["../server/dist/ui.exe"])
+            subprocess.Popen(["./server/dist/ui.exe"])
 
         threading.Thread(target=run_server, daemon=True).start()
 
@@ -53,9 +53,11 @@ class PokerLauncher:
         """启动客户端，加入房间"""
         def run_client():
             # 使用 subprocess 调用 client.
-            subprocess.Popen(["../client/dist/client.exe"])
+            subprocess.Popen(["./client/dist/client.exe"])
 
         threading.Thread(target=run_client, daemon=True).start()
+
+        
 
     def exit_game(self):
         """退出游戏"""
