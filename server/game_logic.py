@@ -572,14 +572,22 @@ class PokerGame:
         ranks = [self.card_value(card.rank) for card in cards]
         ranks = list(set(ranks))  # 去重
         ranks.sort()
+    
+        # 如果牌值不足 5 张，直接返回 0
+        if len(ranks) < 5:
+            return 0
+    
         # 检查顺子
-        for i in range(len(ranks) - 4, -1, -1):
-            if ranks[i + 4] - ranks[i] == 4:
+        for i in range(len(ranks) - 4):  # 遍历到倒数第 5 个元素
+            if ranks[i + 4] - ranks[i] == 4:  # 检查是否是顺子
                 return ranks[i + 4]
-        # 特殊顺子 A,2,3,4,5
+    
+        # 检查特殊顺子 A,2,3,4,5
         if set([14, 2, 3, 4, 5]).issubset(ranks):
             return 5
-        return 0  # 不应该到这里
+    
+        return 0
+
 
     def is_Three_of_a_Kind(self, cards):
         values = [card.rank for card in cards]
@@ -633,13 +641,6 @@ class PokerGame:
                        '9': 9, '10': 10, 'J': 11, 'Q': 12, 'K': 13, 'A': 14}
         return rank_values.get(value, 0)
 
-
-    def card_value(self, value):
-        """将卡牌值转换为整数，用于比较"""
-        rank_values = {'2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8,
-                       '9': 9, '10': 10, 'J': 11, 'Q': 12, 'K': 13, 'A': 14}
-        return rank_values.get(value, 0)
-
     def reset_game(self):
         """重置游戏状态以便进行下一局"""
         self.pot = 0
@@ -667,3 +668,7 @@ class PokerGame:
         """广播消息给所有玩家"""
         for player in self.seated_players:
             player.socket.send(message.encode())
+            
+            
+    if __name__ == "__main__":
+        pass        

@@ -92,7 +92,7 @@ class PokerServer:
     def start_game(self):
         game = PokerGame(self.players, self.big_blind)  # 创建游戏实例并传入玩家对象和大盲注
         game.start_game()  # 开始游戏
-"""
+
 if __name__ == "__main__":
     
     while True:
@@ -119,4 +119,3 @@ if __name__ == "__main__":
     server.big_blind = big_blind
     server.small_blind = big_blind // 2  # 小盲注为大盲注的一半
     server.start()
-"""
