@@ -1,3 +1,4 @@
+# server/test_is_straight.py 测试game_logic.py中的 is_Straight 和 get_straight_high 方法
 from game_logic import PokerGame
 
 class Card:
@@ -14,7 +15,6 @@ def test_is_straight():
     """测试 is_Straight 方法"""
     game = PokerGame(players=[], big_blind=10)  # 创建游戏实例
 
-    # 定义七张测试用的牌
     cards = [
         Card('J', 'Hearts'),
         Card('8', 'Hearts'),

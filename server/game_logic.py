@@ -449,11 +449,10 @@ class PokerGame:
         players_remaining = [player for player in self.seated_players if not player.is_folded]
         if len(players_remaining) == 1:
             winner = players_remaining[0]
-            message = f"{winner.nickname} 是唯一剩下的玩家，赢得了本轮所有的底池筹码：{self.pot}。"
+            message = f"游戏结束，{winner.nickname} 赢得了 {self.pot} 筹码。"
             self.broadcast(message)
             winner.chips += self.pot
             self.pot = 0
-            self.broadcast("游戏结束")
             return True
         return False
 
@@ -472,13 +471,12 @@ class PokerGame:
         # 将底池全部给予牌力最强的玩家
         winner = sorted_players[0]
         winner.chips += self.pot
-        message = f"{winner.nickname} 赢得了底池，金额为：{self.pot} 筹码。"
+        message = f"游戏结束，{winner.nickname} 赢得了 {self.pot} 筹码。"
         self.broadcast(message)
         self.pot = 0
 
         # 移除筹码为零的玩家
         self.remove_bankrupt_players()
-        self.broadcast("游戏结束")
 
     def evaluate_hand(self, cards):
         """评估玩家的手牌组合，返回手牌类型和用于比较的牌值"""

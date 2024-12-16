@@ -66,6 +66,12 @@ class PokerClient:
                     self.ui.clear_community_cards()
                     self.ui.update_pot_display(0)
                     
+                    # 提取获胜玩家和筹码信息并显示弹窗
+                    winner_info = self.parse_winner_info(message)
+                    if winner_info:
+                        winner_name, chips_won = winner_info
+                        self.ui.display_game_over_popup(winner_name, chips_won)
+                    
                 # 检查是否为轮到玩家行动的消息
                 if "请做出您的选择：" in message:
                     self.ui.display_turn_notification()
@@ -219,6 +225,18 @@ class PokerClient:
                 return int(match.group(1))
         except Exception as e:
             print(f"解析本轮下注额信息时出错: {e}")
+        return None
+    
+    def parse_winner_info(self, message):
+        """解析游戏结束时的获胜玩家和赢得筹码数"""
+        try:
+            match = re.search(r"游戏结束，(.*?) 赢得了 (\d+) 筹码", message)
+            if match:
+                winner_name = match.group(1)
+                chips_won = int(match.group(2))
+                return winner_name, chips_won
+        except Exception as e:
+            print(f"解析获胜信息出错: {e}")
         return None
 
 class Card:

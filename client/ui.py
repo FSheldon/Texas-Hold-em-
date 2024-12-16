@@ -271,6 +271,11 @@ class PokerUI:
         """清除轮到玩家行动的提示"""
         if hasattr(self, 'turn_label'):
             self.turn_label.destroy()       
+       
+    def display_game_over_popup(self, winner_name, chips_won):
+        """显示游戏结束弹窗，提示获胜玩家和赢得的筹码"""
+        message = f"游戏结束！\n获胜者：{winner_name}\n赢得筹码：{chips_won}"
+        tk.messagebox.showinfo("游戏结束", message) 
             
     def update_pot_display(self, pot_total):
         """在右上角显示底池总额"""
